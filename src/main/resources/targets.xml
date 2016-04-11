@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectroot>
+    <projects>
+        <!-- 互联网 -->
+        <project enabled="true" category="1" name="donews互联网">
+            <target encode="utf-8" timeout="8000">
+                <multi_url>
+                    <single_url href="http://www.donews.com/net/"></single_url>
+                </multi_url>
+                <wildcard_url href="http://www.donews.com/net/index_(*).html"
+                              startpos="2" endpos="2"/>
+                <target_regex root="">
+                    <value><![CDATA[<a href\=\"(.+?)\" target=\"_blank\" class=\"fl bluefont\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<h3 class=\"title\">(.+?)</h3>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="id" value="arttext"/>
+                </process>
+            </processes>
+        </project>
+        <!-- 移动互联网 -->
+        <project enabled="true" category="2" name="donews移动互联网">
+            <target encode="utf-8" timeout="8000">
+                <multi_url>
+                    <single_url href="http://m.donews.com/"></single_url>
+                </multi_url>
+                <wildcard_url href="http://m.donews.com/index_(*).html"
+                              startpos="2" endpos="2"/>
+                <target_regex root="">
+                    <value><![CDATA[<a href\=\"(.+?)\" target=\"_blank\" class=\"fl bluefont\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<h3 class=\"title\">(.+?)</h3>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="id" value="arttext"/>
+                </process>
+            </processes>
+        </project>
+        <!-- 游戏 -->
+        <project enabled="true" category="3" name="donews游戏">
+            <target encode="utf-8" timeout="8000">
+                <multi_url>
+                    <single_url href="http://game.donews.com/"></single_url>
+                </multi_url>
+
+                <target_regex root="">
+                    <value><![CDATA[<a href\=\"(.+?)\" target=\"_blank\" class=\"fl bluefont\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<h3 class=\"title\">(.+?)</h3>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="id" value="arttext"/>
+                </process>
+            </processes>
+        </project>
+
+        <!-- 电商 -->
+        <project enabled="true" category="4" name="donews电商">
+            <target encode="utf-8" timeout="8000">
+                <multi_url>
+                    <single_url href="http://ec.donews.com/"></single_url>
+                </multi_url>
+
+                <target_regex root="">
+                    <value><![CDATA[<a href\=\"(.+?)\" target=\"_blank\" class=\"fl bluefont\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<h3 class=\"title\">(.+?)</h3>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="id" value="arttext"/>
+                </process>
+            </processes>
+        </project>
+
+        <!-- 疾病预防 -->
+        <project enabled="true" category="5" name="qq疾病">
+            <target encode="utf-8" timeout="8000">
+                <wildcard_url href="http://health.qq.com/c/jibingkepu_(*).htm"
+                              startpos="1" endpos="1"/>
+
+                <target_regex root="http://health.qq.com">
+                    <value><![CDATA[<h2 class=\"yh\"><a target=\"_blank\" href=\"(.+?)\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<h1>(.+?)</h1>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="id" value="Cnt-Main-Article-QQ">
+                    </process_tag_filter>
+                    <process_clean>
+                        <clean_tag type="attribute" key="id" value="invideocon"/>
+                        <clean_tag type="attribute" key="id" value="focusHub"/>
+                        <clean_tag type="attribute" key="id" value="goRead"/>
+                        <clean_tag type="attribute" key="id" value="ch"/>
+                        <clean_tag type="attribute" key="style" value="PADDING-BOTTOM: 29px; WIDOWS: 2; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 2em; MARGIN: 0px; PADDING-LEFT: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; FONT: 16px/28px 宋体, Arial, sans-serif; WHITE-SPACE: normal; ORPHANS: 2; COLOR: rgb(0,0,0); WORD-SPACING: 0px; PADDING-TOP: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px"></clean_tag>
+                        <clean_tag type="attribute" key="style" value="TEXT-ALIGN: left; TEXT-INDENT: 2em"></clean_tag>
+                        <clean_tag type="tag" value="iframe"/>
+                        <clean_tag type="tag" value="script"/>
+                        <clean_tag type="tag" value="style"/>
+                    </process_clean>
+                </process>
+            </processes>
+        </project>
+
+        <!-- 健康养生 -->
+        <project enabled="true" category="6" name="qq养生">
+            <target encode="utf-8" timeout="8000">
+                <wildcard_url href="http://health.qq.com/c/gbaojian_(*).htm"
+                              startpos="1" endpos="1"/>
+
+                <target_regex root="http://health.qq.com">
+                    <value><![CDATA[<h2 class=\"yh\"><a target=\"_blank\" href=\"(.+?)\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<h1>(.+?)</h1>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="id" value="Cnt-Main-Article-QQ">
+                    </process_tag_filter>
+                    <process_clean>
+                        <clean_tag type="attribute" key="id" value="invideocon"/>
+                        <clean_tag type="attribute" key="id" value="focusHub"/>
+                        <clean_tag type="attribute" key="id" value="goRead"/>
+                        <clean_tag type="attribute" key="id" value="ch"/>
+                        <clean_tag type="attribute" key="style" value="PADDING-BOTTOM: 29px; WIDOWS: 2; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 2em; MARGIN: 0px; PADDING-LEFT: 0px; LETTER-SPACING: normal; PADDING-RIGHT: 0px; FONT: 16px/28px 宋体, Arial, sans-serif; WHITE-SPACE: normal; ORPHANS: 2; COLOR: rgb(0,0,0); WORD-SPACING: 0px; PADDING-TOP: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px"></clean_tag>
+                        <clean_tag type="attribute" key="style" value="TEXT-ALIGN: left; TEXT-INDENT: 2em"></clean_tag>
+                        <clean_tag type="tag" value="iframe"/>
+                        <clean_tag type="tag" value="script"/>
+                        <clean_tag type="tag" value="style"/>
+                    </process_clean>
+                </process>
+            </processes>
+        </project>
+
+
+        <project enabled="true" category="7" name="热点">
+            <target encode="utf-8" timeout="8000">
+                <multi_url>
+                    <single_url href="http://news.cnr.cn/news/"></single_url>
+                </multi_url>
+
+                <target_regex root="http://news.cnr.cn">
+                    <value><![CDATA[<li><span class=\"left ml20\">・<a href=\"(.+?)\" target=\"_blank\">]]></value>
+                </target_regex>
+            </target>
+            <processes>
+                <process flow="false" table="" field="title">
+                    <process_regex_filter><![CDATA[<p class="f22 lh30 yahei">(.+?)</p>]]></process_regex_filter>
+                </process>
+                <process flow="false" table="" field="content">
+                    <process_tag_filter pos="1" key="class" value="TRS_Editor"/>
+                </process>
+            </processes>
+        </project>
+
+    </projects>
+</projectroot>
