@@ -26,7 +26,7 @@ import java.util.List;
  * Created by lenovo on 2015/6/26.
  */
 
-@SuppressWarnings("ALL")
+
 @Controller
 public class BlogController {
 
