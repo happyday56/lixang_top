@@ -1,5 +1,5 @@
 package com.lgh.lixiang.boot;
- 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -21,15 +21,11 @@ public class WebHandlerExceptionResolver implements HandlerExceptionResolver {
 
         if (requestURI.startsWith("/")) {
             try {
-                try {
-                    throw ex;
-                } catch (Exception e) {
-                    log.error("admin upExcepted error", e);
-                }
-                response.sendRedirect("/404.html");
-            } catch (IOException e) {
-
+                throw ex;
+            } catch (Exception e) {
+                log.error("admin upExcepted error", e);
             }
+            return new ModelAndView("redirect:/404.html");
         }
         return null;
     }

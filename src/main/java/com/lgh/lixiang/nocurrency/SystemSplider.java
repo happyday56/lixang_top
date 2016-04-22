@@ -26,28 +26,15 @@ public class SystemSplider {
     @Autowired
     private BlogService blogService;
 
-    @Scheduled(cron = "0 10 18 * * ?")
-    private void goSplider18() throws Exception {
-        logger.info("开始抓取任务18:" + new Date(System.currentTimeMillis()));
+    @Scheduled(cron = "0 0 9,13,18 * * ?")
+    private void goSplider() throws Exception {
+        logger.info("start splidering now");
         spliderService.start();
     }
-
-    @Scheduled(cron = "0 10 13 * * ?")
-    private void goSplider13() throws Exception {
-        logger.info("开始抓取任务13:" + new Date(System.currentTimeMillis()));
-        spliderService.start();
-    }
-
-    @Scheduled(cron = "0 10 9 * * ?")
-    private void goSplider9() throws Exception {
-        logger.info("开始抓取任务9:" + new Date(System.currentTimeMillis()));
-        spliderService.start();
-    }
-
 
     @Scheduled(cron = "0 0 1 * * ?")
     private void countHot() throws Exception {
-        logger.info("开始Hot统计:" + new Date(System.currentTimeMillis()));
+        logger.info("start counting hot now");
         blogService.countHot();
     }
 }

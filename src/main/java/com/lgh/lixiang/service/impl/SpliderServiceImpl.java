@@ -9,7 +9,6 @@ import com.lgh.lixiang.service.SpliderService;
 import com.lgh.lixiang.common.FileUtil;
 
 
-
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Source;
@@ -53,21 +52,13 @@ public class SpliderServiceImpl implements SpliderService {
 
     @Transactional
     public void start() throws Exception {
-//        List<Blog> blogs = new ArrayList<Blog>();
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)
-//                , calendar.get(Calendar.DAY_OF_MONTH), 8, 0, 0);
-
-
-//        logger.info(calendar.getTime());
-//        logger.info(this.getClass().getResource("/").getPath());
 
         Date uploadTime = new Date(System.currentTimeMillis());
 
         File file = new File(this.getClass().getResource("/").getPath() + "targets.xml");
 //        logger.info(file.exists());
         if (!file.exists()) {
-            logger.error("没有找到targets.xml文件");
+            logger.error("not find targets.xml");
             return;
         }
         //读取项目配置的XML文件
@@ -82,14 +73,14 @@ public class SpliderServiceImpl implements SpliderService {
         List<BlogFilter> blogFilters = new ArrayList<>();
         //用于过滤
         List<String> listTitles = new ArrayList<>();
-        logger.info("配置文件加载完成，网页抓取工作开始.....");
+        logger.info("config file loading finished,start spridering");
         List<Project> listProject = root.getProjects();
         for (Project project : listProject) {
             Boolean enabled = project.getEnabled();
             Long categoryId = project.getCategory();
             Category category = getCategory(categories, categoryId);
             if (category == null) {
-                logger.info("project 分类Id " + categoryId + " 配置错误");
+                logger.error("have no categoryId " + categoryId);
                 continue;
             }
 
@@ -98,25 +89,25 @@ public class SpliderServiceImpl implements SpliderService {
             //判断是否进行抓取
             if (enabled) {
 
-                logger.info(projectName + " 处理目标开始....");
+                logger.info(projectName + " start doTarget....");
                 // 获取项目处理目标，分析后，返回需要处理的具体页面
                 Target target = project.getTarget();
                 List<String> listUrl = null;
                 if (target == null)
-                    logger.error("xml没有定义target");
+                    logger.error("xml have no target");
                 else {
                     try {
                         listUrl = doTarget(target);
                     } catch (Exception exp) {
-                        logger.error("处理目标出现异常" + exp.getMessage());
+                        logger.error("doTarget error " + exp.getMessage());
                     }
                 }
 
                 totalCount += listUrl.size();
 
-                logger.info("处理目标结束 获取到最终的网址数:" + listUrl.size());
+                logger.info("doTarget finished,url length:" + listUrl.size());
 
-                logger.info("批量处理最终网址页面开始....");
+                logger.info("start web page");
                 List<Process> processes = project.getProcesses();
                 for (String doFinalUrl : listUrl) {
                     try {
@@ -148,13 +139,13 @@ public class SpliderServiceImpl implements SpliderService {
 //
 //                        }
                     } catch (Exception exp) {
-                        logger.error("网址" + listUrl + "出现异常:" + exp.getMessage());
+                        logger.error("web url:" + listUrl + exp.getMessage());
                         errorCount++;
                     }
                 }
-                logger.info("project " + projectName + " 批量处理最终网址页面结束");
+                logger.info("project " + projectName + " finined");
             } else {
-                logger.error("project " + projectName + " 没有启用 暂时不处理");
+                logger.error("project " + projectName + " no open,so no do");
             }
         }
 
@@ -167,7 +158,7 @@ public class SpliderServiceImpl implements SpliderService {
         blogFilterRepository.save(blogFilters);
 
 
-        logger.info("总抓取条目：" + totalCount + " 成功数：" + blogSpliders.size() + " 错误数：" + errorCount + " 重复数：" + repeatCount);
+        logger.info("total：" + totalCount + " success：" + blogSpliders.size() + " error：" + errorCount + " repeat：" + repeatCount);
 
     }
 

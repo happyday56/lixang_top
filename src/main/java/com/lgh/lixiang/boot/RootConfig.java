@@ -20,7 +20,7 @@ import java.io.File;
 
 @Configuration
 //@EnableTransactionManagement(mode = AdviceMode.PROXY)
-@ComponentScan("com.lgh.lixiang.service")
+@ComponentScan({"com.lgh.lixiang.service", "com.lgh.lixiang.nocurrency"})
 @EnableJpaRepositories(value = {"com.lgh.lixiang.repository"})
 @ImportResource(value = {"classpath:spring-jpa.xml"})
 @Import(LoggingConfig.class)
@@ -32,7 +32,5 @@ public class RootConfig {
     @PostConstruct
     public void init() {
         log.info("root start path " + new File(".").getAbsolutePath());
-
-
     }
 }

@@ -131,7 +131,7 @@ public class BlogServiceImpl implements BlogService {
     public void countHot() {
 
         blogHotRepository.deleteAll();
-        blogHotRepository.flush();
+//        blogHotRepository.flush();
 
         Specification<Blog> specification = new Specification<Blog>() {
             @Override
