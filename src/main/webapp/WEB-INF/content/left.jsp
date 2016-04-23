@@ -6,7 +6,7 @@
         <ul>
             <c:forEach items="${sidebar}" var="item" begin="0" end="10" varStatus="status">
                 <li><a target="_blank"
-                       href="<c:url value="http://nice98.com/v/${item.blog.id}" />"
+                       href="<c:url value="/v/${item.blog.id}" />"
                         > ${item.blog.title}</a>
                 </li>
             </c:forEach>

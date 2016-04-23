@@ -3,10 +3,7 @@ package com.lgh.lixiang.boot;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-        exceptionResolvers.add(new WebHandlerExceptionResolver());
+//        exceptionResolvers.add(new WebHandlerExceptionResolver());
     }
 
 
@@ -37,13 +34,18 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     }
 
 
-    /**
-     * 禁止拦截静态资源
-     *
-     * @param registry
-     */
+//    /**
+//     * 禁止拦截静态资源
+//     *
+//     * @param registry
+//     */
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+//    }
+
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }

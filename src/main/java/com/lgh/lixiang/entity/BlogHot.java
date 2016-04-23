@@ -1,5 +1,8 @@
 package com.lgh.lixiang.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 /**
@@ -7,28 +10,14 @@ import javax.persistence.*;
  * Created by Administrator on 2015/8/9.
  */
 @Entity
+@Getter
+@Setter
 public class BlogHot {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Blog blog;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Blog getBlog() {
-        return blog;
-    }
-
-    public void setBlog(Blog blog) {
-        this.blog = blog;
-    }
 }

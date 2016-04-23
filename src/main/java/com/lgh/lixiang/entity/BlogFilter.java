@@ -1,5 +1,10 @@
 package com.lgh.lixiang.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +14,10 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BlogFilter {
     /**
      * 标题
@@ -16,11 +25,4 @@ public class BlogFilter {
     @Column(length = 200)
     @Id
     private String title;
-
-    public BlogFilter(String title) {
-        this.title = title;
-    }
-
-    public BlogFilter() {
-    }
 }

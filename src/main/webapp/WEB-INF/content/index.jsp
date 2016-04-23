@@ -29,11 +29,11 @@
         <c:forEach items="${list.blogs}" var="item" begin="0" end="10" varStatus="status">
             <div class="list">
                 <div class="list_title">
-                    <a href="<c:url value="http://nice98.com/v/${item.id}" />"
+                    <a href="<c:url value="/v/${item.id}" />"
                        title="${item.title }"><h1>${item.title }</h1></a>
                 </div>
                 <div class="list_summary">
-                    <a href="<c:url value="http://nice98.com/v/${item.id}" />">
+                    <a href="<c:url value="/v/${item.id}" />">
                         <c:if test="${item.pictureUrl!=''}">
                             <div class="list_img_holder"><img src="${item.pictureUrl}"/></div>
                         </c:if>

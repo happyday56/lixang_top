@@ -27,10 +27,11 @@ import java.util.List;
  */
 
 
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Controller
 public class BlogController {
 
-    private Log logger = LogFactory.getLog(BlogController.class);
+    private Log log = LogFactory.getLog(BlogController.class);
 
     @Autowired
     private BlogService blogService;
@@ -50,25 +51,26 @@ public class BlogController {
     @Autowired
     private BlogHotRepository blogHotRepository;
 
-    @RequestMapping(value = "/")
-    public ModelAndView index(HttpServletRequest request) {
-        return index(request, 1);
-    }
+//    @RequestMapping(value = "/")
+//    public ModelAndView index(HttpServletRequest request) {
+//        log.info("enter index");
+//        ModelAndView view = new ModelAndView("index");
+//        request.setAttribute("list", blogService.getIndexList(1, 20));
+//
+//        setSideBar(request);
+//        return view;
+//    }
 
     @RequestMapping(value = "/{page}")
     public ModelAndView index(HttpServletRequest request, @PathVariable("page") Integer page) {
+        log.info("enter page" + page);
         ModelAndView view = new ModelAndView("index");
         request.setAttribute("list", blogService.getIndexList(page, 20));
-
         setSideBar(request);
         return view;
     }
 
-    private void setSideBar(HttpServletRequest request) {
-        List<BlogHot> list = blogHotRepository.findAll();
-        list.forEach(p -> p.getBlog().setTitle(p.getBlog().getTitle().length() > 15 ? p.getBlog().getTitle().substring(0, 15) : p.getBlog().getTitle()));
-        request.setAttribute("sidebar", list);
-    }
+
 
     /**
      * 分类页面
@@ -80,12 +82,19 @@ public class BlogController {
      */
     @RequestMapping(value = "/category/{id}")
     public ModelAndView category(HttpServletRequest request, @PathVariable("id") long id) throws SQLException {
-        return category(request, id, 1);
+        log.info("enter category id "+ id);
+//        return category(request, id, 1);
+        ModelAndView view = new ModelAndView("category");
+        request.setAttribute("list", categoryService.list(id, 1, 10));
+
+        setSideBar(request);
+        return view;
     }
 
     @RequestMapping(value = "/category/{id}/{page}")
     public ModelAndView category(HttpServletRequest request
             , @PathVariable("id") long categoryId, @PathVariable("page") Integer page) throws SQLException {
+        log.info("enter category id "+ categoryId + " page " + page );
         ModelAndView view = new ModelAndView("category");
         request.setAttribute("list", categoryService.list(categoryId, page, 10));
 
@@ -239,5 +248,14 @@ public class BlogController {
     String splider() throws Exception {
         spliderService.start();
         return "finished";
+    }
+
+
+
+
+    private void setSideBar(HttpServletRequest request) {
+        List<BlogHot> list = blogHotRepository.findAll();
+        list.forEach(p -> p.getBlog().setTitle(p.getBlog().getTitle().length() > 15 ? p.getBlog().getTitle().substring(0, 15) : p.getBlog().getTitle()));
+        request.setAttribute("sidebar", list);
     }
 }

@@ -111,25 +111,25 @@ public class SpliderServiceImpl implements SpliderService {
                 List<Process> processes = project.getProcesses();
                 for (String doFinalUrl : listUrl) {
                     try {
-                        Blog blogSplider = doProcess(doFinalUrl, processes);
+                        Blog blog = doProcess(doFinalUrl, processes);
                         //内容存入list中 标题不能重复
-                        if (blogSplider != null
-                                && !StringUtils.isEmpty(blogSplider.getTitle())
-                                && !StringUtils.isEmpty(blogSplider.getContent())
-                                && !listTitles.contains(blogSplider.getTitle())
-                                && blogFilterRepository.findOne(blogSplider.getTitle()) == null) {
+                        if (blog != null
+                                && !StringUtils.isEmpty(blog.getTitle())
+                                && !StringUtils.isEmpty(blog.getContent())
+                                && !listTitles.contains(blog.getTitle())
+                                && blogFilterRepository.findOne(blog.getTitle()) == null) {
                             //设置时间间隔
 
                             uploadTime = new Date(uploadTime.getTime() + 60 * 1000);
-                            blogSplider.setCategory(category);
-                            blogSplider.setUploadTime(uploadTime);
-                            blogSplider.setViews(0L);
-                            blogSpliders.add(blogSplider);
+                            blog.setCategory(category);
+                            blog.setUploadTime(uploadTime);
+                            blog.setViews(0L);
+                            blogSpliders.add(blog);
 
-                            BlogFilter blogFilter = new BlogFilter(blogSplider.getTitle());
+                            BlogFilter blogFilter = new BlogFilter(blog.getTitle());
                             blogFilters.add(blogFilter);
 
-                            listTitles.add(blogSplider.getTitle());
+                            listTitles.add(blog.getTitle());
                         } else {
                             repeatCount++;
                         }

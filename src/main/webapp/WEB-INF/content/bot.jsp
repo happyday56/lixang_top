@@ -9,7 +9,7 @@
     </div>
     <div>
         Copyright &copy; 2015 <a href="<c:url value="/"/>">nice98</a> <a href="http://www.miitbeian.gov.cn/"
-                                                                         target="_blank">浙ICP备15021790号</a>
+                                                                         target="_blank">浙ICP备15021790号-1</a>
     </div>
 </div>
 

@@ -19,14 +19,20 @@ public class WebHandlerExceptionResolver implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         String requestURI = request.getRequestURI().substring(request.getContextPath().length());
 
-        if (requestURI.startsWith("/")) {
+        if (requestURI.startsWith("/man")) {
             try {
                 throw ex;
             } catch (Exception e) {
-                log.error("admin upExcepted error", e);
+                log.error("admin error", e);
+            }
+            return new ModelAndView("redirect:/404.html");
+        } else {
+            try {
+                throw ex;
+            } catch (Exception e) {
+                log.error("web error", e);
             }
             return new ModelAndView("redirect:/404.html");
         }
-        return null;
     }
 }

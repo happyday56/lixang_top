@@ -53,7 +53,7 @@ public class Blog {
     /**
      * 分类
      */
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Category category;
 
     /**
@@ -66,19 +66,4 @@ public class Blog {
      * 浏览次数
      */
     private Long views;
-
-
-    public Blog() {
-    }
-
-    public Blog(String title, String content, String summary, String keywords, String description, Category category, Date uploadTime, Long views) {
-        this.title = title;
-        this.content = content;
-        this.summary = summary;
-        this.keywords = keywords;
-        this.description = description;
-        this.category = category;
-        this.uploadTime = uploadTime;
-        this.views = views;
-    }
 }
