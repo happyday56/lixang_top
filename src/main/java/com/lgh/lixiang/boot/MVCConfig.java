@@ -17,7 +17,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-//        exceptionResolvers.add(new WebHandlerExceptionResolver());
+        exceptionResolvers.add(new WebHandlerExceptionResolver());
     }
 
 
@@ -34,18 +34,18 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     }
 
 
-//    /**
-//     * 禁止拦截静态资源
-//     *
-//     * @param registry
-//     */
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-//    }
-
+    /**
+     * 禁止拦截静态资源
+     *
+     * @param registry
+     */
     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
+//    @Override
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
 }

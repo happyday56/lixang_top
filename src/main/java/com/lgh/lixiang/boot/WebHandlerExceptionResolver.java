@@ -25,14 +25,14 @@ public class WebHandlerExceptionResolver implements HandlerExceptionResolver {
             } catch (Exception e) {
                 log.error("admin error", e);
             }
-            return new ModelAndView("redirect:/404.html");
+            return new ModelAndView("redirect:/404error");
         } else {
             try {
                 throw ex;
             } catch (Exception e) {
                 log.error("web error", e);
             }
-            return new ModelAndView("redirect:/404.html");
+            return new ModelAndView("redirect:/404error");
         }
     }
 }

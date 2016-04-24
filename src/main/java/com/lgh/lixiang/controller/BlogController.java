@@ -51,25 +51,20 @@ public class BlogController {
     @Autowired
     private BlogHotRepository blogHotRepository;
 
-//    @RequestMapping(value = "/")
-//    public ModelAndView index(HttpServletRequest request) {
+    @RequestMapping(value = "/")
+    public ModelAndView index(HttpServletRequest request) {
 //        log.info("enter index");
-//        ModelAndView view = new ModelAndView("index");
-//        request.setAttribute("list", blogService.getIndexList(1, 20));
-//
-//        setSideBar(request);
-//        return view;
-//    }
+        return index(request, 1);
+    }
 
     @RequestMapping(value = "/{page}")
     public ModelAndView index(HttpServletRequest request, @PathVariable("page") Integer page) {
-        log.info("enter page" + page);
+//        log.info("enter index page" + page);
         ModelAndView view = new ModelAndView("index");
         request.setAttribute("list", blogService.getIndexList(page, 20));
         setSideBar(request);
         return view;
     }
-
 
 
     /**
@@ -82,19 +77,14 @@ public class BlogController {
      */
     @RequestMapping(value = "/category/{id}")
     public ModelAndView category(HttpServletRequest request, @PathVariable("id") long id) throws SQLException {
-        log.info("enter category id "+ id);
-//        return category(request, id, 1);
-        ModelAndView view = new ModelAndView("category");
-        request.setAttribute("list", categoryService.list(id, 1, 10));
-
-        setSideBar(request);
-        return view;
+//        log.info("enter category id " + id);
+        return category(request, id, 1);
     }
 
     @RequestMapping(value = "/category/{id}/{page}")
     public ModelAndView category(HttpServletRequest request
             , @PathVariable("id") long categoryId, @PathVariable("page") Integer page) throws SQLException {
-        log.info("enter category id "+ categoryId + " page " + page );
+//        log.info("enter category id " + categoryId + " page " + page);
         ModelAndView view = new ModelAndView("category");
         request.setAttribute("list", categoryService.list(categoryId, page, 10));
 
@@ -134,11 +124,14 @@ public class BlogController {
      * @param id
      */
     @RequestMapping(value = "/viewcount", method = RequestMethod.GET)
-    public void viewcount(@RequestParam Long id) {
+    @ResponseBody
+    public void viewcount(@RequestParam Long id) throws Exception {
+        log.info("enter viewcount " + id);
         Blog blog = blogRepository.findOne(id);
-        blog.setViews(blog.getViews() + 1);
-        blogRepository.save(blog);
-//        blogRepository.updateViews(id, 1L);
+        if (blog != null) {
+            blog.setViews(blog.getViews() + 1);
+            blogRepository.save(blog);
+        }
     }
 
     @RequestMapping(value = "/about")
@@ -159,6 +152,14 @@ public class BlogController {
     @RequestMapping(value = "/links")
     public ModelAndView links(HttpServletRequest request) {
         ModelAndView view = new ModelAndView("links");
+        setSideBar(request);
+        return view;
+    }
+
+
+    @RequestMapping(value = "/404error")
+    public ModelAndView error(HttpServletRequest request) {
+        ModelAndView view = new ModelAndView("404error");
         setSideBar(request);
         return view;
     }
@@ -249,8 +250,6 @@ public class BlogController {
         spliderService.start();
         return "finished";
     }
-
-
 
 
     private void setSideBar(HttpServletRequest request) {

@@ -3,7 +3,7 @@
 <div id="header">
     <div class="top_bar">
         <div class="abs_m">
-            <a href="<c:url value="http://nice98.com" />"><img src="<c:url value="/resources/images/nice98.png"/>"
+            <a href="<c:url value="/" />"><img src="<c:url value="/resources/images/nice98.png"/>"
                                                                alt="nice98"/></a>
         </div>
     </div>
