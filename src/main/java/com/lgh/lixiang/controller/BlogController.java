@@ -55,6 +55,13 @@ public class BlogController {
     public ModelAndView index(HttpServletRequest request) {
 //        log.info("enter index");
         return index(request, 1);
+//        return test(request);
+    }
+
+
+    public ModelAndView test(HttpServletRequest request) {
+        ModelAndView view = new ModelAndView("test");
+        return view;
     }
 
     @RequestMapping(value = "/{page}")
