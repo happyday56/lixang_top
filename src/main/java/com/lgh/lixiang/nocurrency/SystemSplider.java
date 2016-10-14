@@ -26,7 +26,7 @@ public class SystemSplider {
     @Autowired
     private BlogService blogService;
 
-    @Scheduled(cron = "0 0 9,13,18 * * ?")
+    @Scheduled(cron = "0 0 13 * * ?")
     private void goSplider() throws Exception {
         logger.info("start splidering now");
         spliderService.start();

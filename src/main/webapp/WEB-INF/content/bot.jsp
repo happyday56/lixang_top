@@ -3,11 +3,6 @@
 <div class="clear"></div>
 <div id="footer">
     <div>
-        <a href="<c:url value="/about" />" title="关于nice98">关于</a>
-        <a href="<c:url value="/links" />" title="友情链接">友站</a>
-        <a href="<c:url value="/as" />" title="广告位出售">广告</a>
-    </div>
-    <div>
         Copyright &copy; 2015 <a href="<c:url value="/"/>">nice98</a> <a href="http://www.miitbeian.gov.cn/"
                                                                          target="_blank">浙ICP备15021790号-1</a>
     </div>
