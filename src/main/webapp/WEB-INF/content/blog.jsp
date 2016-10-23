@@ -14,7 +14,7 @@
     <meta name="description" content="${item.description}"/>
     <meta name="author" content="nice98"/>
     <meta name="copyright" content="nice98版权所有"/>
-    <title>${item.title }_nice98</title>
+    <title>${item.title}</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/resources/css/pagebar.css" />" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/favicon.ico"/>" type="image/x-icon"/>

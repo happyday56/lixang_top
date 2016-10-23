@@ -7,11 +7,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui"/>
-    <meta name="keywords" content="nice98 综合门户 移动互联网新闻 健康新闻 电子商务新闻 游戏新闻"/>
-    <meta name="description" content="中国的web2.0综合门户网站。提供互联网、医疗健康行业资讯、数据分析报告等服务。是中国互联网从业人士交流最权威的平台，是了解中国互联网行业最重要的窗口。"/>
-    <meta name="author" content="nice98"/>
-    <meta name="copyright" content="nice98版权所有"/>
-    <title>nice98--分享知识，把握未来</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=">
+    <meta name="author" content=""/>
+    <meta name="copyright" content=""/>
+    <title>98信息健康网--信息与健康互联，知识与健康共进</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/resources/css/pagebar.css" />" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/favicon.ico"/>" type="image/x-icon"/>

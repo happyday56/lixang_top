@@ -3,8 +3,10 @@
 <div id="header">
     <div class="top_bar">
         <div class="abs_m">
-            <a href="<c:url value="/" />"><img src="<c:url value="/resources/images/nice98.png"/>"
-                                                               alt="nice98"/></a>
+            <a href="<c:url value="/" />">
+                <img src="<c:url value="/resources/images/nice98.png"/>"
+                     alt="nice98"/>
+            </a>
         </div>
     </div>
 
@@ -12,7 +14,8 @@
     <div class="top_menu_bar">
         <div id="top_menu" class="top_menu">
             <div class="top_menu_list">
-                <a class="btn cur" href="<c:url value="/category/7"/>">热点</a>
+                <a class="btn" href="<c:url value="/"/>">首页</a>
+                <a class="btn" href="<c:url value="/category/7"/>">热点</a>
                 <a class="btn" href="<c:url value="/category/1"/>">互联网</a>
                 <a class="btn" href="<c:url value="/category/2"/>">移动互联网</a>
                 <a class="btn" href="<c:url value="/category/3"/>">游戏娱乐</a>

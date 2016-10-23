@@ -14,13 +14,13 @@
     <meta name="description" content="${list.category.description }"/>
     <meta name="author" content="nice98"/>
     <meta name="copyright" content="nice98版权所有"/>
-    <title>${list.nav.title}_nice98</title>
+    <title>${list.nav.title}</title>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" type="text/css"/>
     <link href="<c:url value="/resources/css/pagebar.css" />" rel="stylesheet" type="text/css"/>
     <link rel="shortcut icon" href="<c:url value="/resources/images/favicon.ico"/>" type="image/x-icon"/>
 </head>
 
-<body >
+<body>
 <div id="wrapper">
 
     <c:import url="top.jsp"></c:import>

@@ -1,6 +1,7 @@
 package com.lgh.lixiang.controller;
 
 import com.lgh.lixiang.entity.*;
+import com.lgh.lixiang.model.web.WebBlogBaseModel;
 import com.lgh.lixiang.model.web.WebBlogDetailModel;
 import com.lgh.lixiang.repository.*;
 import com.lgh.lixiang.service.*;
@@ -9,6 +10,10 @@ import net.htmlparser.jericho.StartTag;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,6 +76,7 @@ public class BlogController {
         ModelAndView view = new ModelAndView("index");
         request.setAttribute("list", blogService.getIndexList(page, 20));
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -96,6 +103,7 @@ public class BlogController {
         request.setAttribute("list", categoryService.list(categoryId, page, 10));
 
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -115,6 +123,7 @@ public class BlogController {
         request.setAttribute("item", blog);
 
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -146,6 +155,7 @@ public class BlogController {
         ModelAndView view = new ModelAndView("about");
 
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -153,6 +163,7 @@ public class BlogController {
     public ModelAndView as(HttpServletRequest request) {
         ModelAndView view = new ModelAndView("as");
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -160,6 +171,7 @@ public class BlogController {
     public ModelAndView links(HttpServletRequest request) {
         ModelAndView view = new ModelAndView("links");
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -168,6 +180,7 @@ public class BlogController {
     public ModelAndView error(HttpServletRequest request) {
         ModelAndView view = new ModelAndView("404error");
         setSideBar(request);
+        setNearlist(request);
         return view;
     }
 
@@ -263,5 +276,18 @@ public class BlogController {
         List<BlogHot> list = blogHotRepository.findAll();
         list.forEach(p -> p.getBlog().setTitle(p.getBlog().getTitle().length() > 15 ? p.getBlog().getTitle().substring(0, 15) : p.getBlog().getTitle()));
         request.setAttribute("sidebar", list);
+    }
+
+    private void setNearlist(HttpServletRequest request) {
+        Pageable pageable = new PageRequest(0, 10, new Sort(Sort.Direction.DESC, "id"));
+        Page<Blog> blogs = blogRepository.findAll(pageable);
+        List<WebBlogBaseModel> webBlogBaseModels = new ArrayList<>();
+        blogs.forEach(x -> {
+            WebBlogBaseModel blogBaseModel = new WebBlogBaseModel();
+            blogBaseModel.setId(x.getId());
+            blogBaseModel.setTitle(x.getTitle().length() > 15 ? x.getTitle().substring(0, 15) : x.getTitle());
+            webBlogBaseModels.add(blogBaseModel);
+        });
+        request.setAttribute("nearlist", webBlogBaseModels);
     }
 }
